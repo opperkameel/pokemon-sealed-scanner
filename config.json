@@ -1,0 +1,346 @@
+{
+  "home_country": "NL",
+  "home_vat_rate": 0.21,
+  "selling": {
+    "fee_pct": 0.05,
+    "fixed_cost_eur": 0.5,
+    "_comment": "Fees you pay when you sell: e.g. Cardmarket ~5% commission, or Shopify payments ~2.1%. fixed_cost_eur = packaging etc. per unit."
+  },
+  "units_per_order": 1,
+  "min_margin_pct_highlight": 0.15,
+  "request_delay_seconds": 1.0,
+  "max_pages_per_shop": 40,
+  "fx_fallback_to_eur": {
+    "EUR": 1.0,
+    "CHF": 1.06,
+    "SEK": 0.088,
+    "DKK": 0.134,
+    "PLN": 0.235,
+    "CZK": 0.04
+  },
+  "shops": [
+    {
+      "name": "cardcosmos",
+      "url": "https://cardcosmos.de",
+      "platform": "shopify",
+      "country": "DE",
+      "currency": "EUR",
+      "shipping_eur": 6.9,
+      "default_language": null
+    },
+    {
+      "name": "PKMWinkel",
+      "url": "https://pokemonwinkel.nl",
+      "platform": "shopify",
+      "country": "NL",
+      "currency": "EUR",
+      "shipping_eur": 4.95,
+      "default_language": "EN"
+    },
+    {
+      "name": "TCG Winkel",
+      "url": "https://tcgwinkel.nl",
+      "platform": "shopify",
+      "country": "NL",
+      "currency": "EUR",
+      "shipping_eur": 4.95,
+      "default_language": "EN"
+    },
+    {
+      "name": "TCGKing",
+      "url": "https://tcgking.nl",
+      "platform": "shopify",
+      "country": "NL",
+      "currency": "EUR",
+      "shipping_eur": 4.95,
+      "default_language": "EN"
+    },
+    {
+      "name": "TCGHaven",
+      "url": "https://tcghaven.nl",
+      "platform": "shopify",
+      "country": "NL",
+      "currency": "EUR",
+      "shipping_eur": 4.95,
+      "default_language": "EN"
+    },
+    {
+      "name": "TCGDepot",
+      "url": "https://tcgdepot.nl",
+      "platform": "shopify",
+      "country": "NL",
+      "currency": "EUR",
+      "shipping_eur": 4.95,
+      "default_language": "EN",
+      "pokemon_only": true
+    },
+    {
+      "name": "CardPoint",
+      "url": "https://cardpoint.nl",
+      "platform": "shopify",
+      "country": "NL",
+      "currency": "EUR",
+      "shipping_eur": 4.95,
+      "default_language": "EN"
+    },
+    {
+      "name": "PokePalace",
+      "url": "https://pokepalace.nl",
+      "platform": "woocommerce",
+      "country": "NL",
+      "currency": "EUR",
+      "shipping_eur": 4.95,
+      "default_language": "EN",
+      "pokemon_only": true,
+      "search": ""
+    },
+    {
+      "name": "PKM Kaarten",
+      "url": "https://www.pkmkaarten.nl",
+      "platform": "woocommerce",
+      "country": "NL",
+      "currency": "EUR",
+      "shipping_eur": 4.95,
+      "default_language": "EN"
+    },
+    {
+      "name": "PokeVault",
+      "url": "https://pokevault.nl",
+      "platform": "woocommerce",
+      "country": "NL",
+      "currency": "EUR",
+      "shipping_eur": 4.95,
+      "default_language": "EN"
+    },
+    {
+      "name": "Pokémonshop.fr",
+      "url": "https://pokemonshop.fr",
+      "platform": "shopify",
+      "country": "FR",
+      "currency": "EUR",
+      "shipping_eur": 9.9,
+      "default_language": "FR"
+    },
+    {
+      "name": "PokeStation",
+      "url": "https://pokestation.fr",
+      "platform": "shopify",
+      "country": "FR",
+      "currency": "EUR",
+      "shipping_eur": 9.9,
+      "default_language": "FR"
+    },
+    {
+      "name": "Maximus",
+      "url": "https://maximus.be",
+      "platform": "woocommerce",
+      "country": "BE",
+      "currency": "EUR",
+      "shipping_eur": 6.95,
+      "default_language": null,
+      "search": ""
+    },
+    {
+      "name": "Outpost Brussels",
+      "url": "https://outpostbrussels.be",
+      "platform": "shopify",
+      "country": "BE",
+      "currency": "EUR",
+      "shipping_eur": 6.95,
+      "default_language": null
+    },
+    {
+      "name": "Belgium Poke Center",
+      "url": "https://belgiumpokecenter.com",
+      "platform": "shopify",
+      "country": "BE",
+      "currency": "EUR",
+      "shipping_eur": 6.95,
+      "default_language": "FR"
+    },
+    {
+      "name": "TCG Kiosk",
+      "url": "https://tcg-kiosk.be",
+      "platform": "woocommerce",
+      "country": "BE",
+      "currency": "EUR",
+      "shipping_eur": 6.95,
+      "default_language": null,
+      "search": ""
+    },
+    {
+      "name": "Cardworld",
+      "url": "https://cardworld.be",
+      "platform": "shopify",
+      "country": "BE",
+      "currency": "EUR",
+      "shipping_eur": 6.95,
+      "default_language": null
+    },
+    {
+      "name": "Vinticards",
+      "url": "https://vinticards.be",
+      "platform": "woocommerce",
+      "country": "BE",
+      "currency": "EUR",
+      "shipping_eur": 6.95,
+      "default_language": null,
+      "search": ""
+    },
+    {
+      "name": "CrispyCards",
+      "url": "https://crispycards.de",
+      "platform": "shopify",
+      "country": "DE",
+      "currency": "EUR",
+      "shipping_eur": 7.95,
+      "default_language": null
+    },
+    {
+      "name": "God of Cards",
+      "url": "https://godofcards.com",
+      "platform": "shopify",
+      "country": "DE",
+      "currency": "EUR",
+      "shipping_eur": 7.95,
+      "default_language": null
+    },
+    {
+      "name": "Kartenbasis",
+      "url": "https://kartenbasis.de",
+      "platform": "shopify",
+      "country": "DE",
+      "currency": "EUR",
+      "shipping_eur": 7.95,
+      "default_language": null
+    },
+    {
+      "name": "Toy Treasure",
+      "url": "https://toy-treasure.com",
+      "platform": "shopify",
+      "country": "DE",
+      "currency": "EUR",
+      "shipping_eur": 7.95,
+      "default_language": null
+    },
+    {
+      "name": "BaruZcard",
+      "url": "https://baruzcard.it",
+      "platform": "shopify",
+      "country": "IT",
+      "currency": "EUR",
+      "shipping_eur": 12.0,
+      "default_language": null
+    },
+    {
+      "name": "The PokeHunter",
+      "url": "https://thepokehunter.it",
+      "platform": "shopify",
+      "country": "IT",
+      "currency": "EUR",
+      "shipping_eur": 12.0,
+      "default_language": null
+    },
+    {
+      "name": "Otakura",
+      "url": "https://otakura.com",
+      "platform": "shopify",
+      "country": "IT",
+      "currency": "EUR",
+      "shipping_eur": 12.0,
+      "default_language": null
+    },
+    {
+      "name": "BSA Store",
+      "url": "https://www.bsastore.it",
+      "platform": "shopify",
+      "country": "IT",
+      "currency": "EUR",
+      "shipping_eur": 12.0,
+      "default_language": null
+    },
+    {
+      "name": "PokeDealTCG",
+      "url": "https://www.pokedealtcg.es",
+      "platform": "shopify",
+      "country": "ES",
+      "currency": "EUR",
+      "shipping_eur": 12.0,
+      "default_language": null
+    },
+    {
+      "name": "Iberian Collect",
+      "url": "https://iberiancollect.com",
+      "platform": "shopify",
+      "country": "ES",
+      "currency": "EUR",
+      "shipping_eur": 12.0,
+      "default_language": null
+    },
+    {
+      "name": "TodoHits",
+      "url": "https://todohits.com",
+      "platform": "shopify",
+      "country": "ES",
+      "currency": "EUR",
+      "shipping_eur": 12.0,
+      "default_language": null
+    },
+    {
+      "name": "JJCollection",
+      "url": "https://www.jjcollection.es",
+      "platform": "shopify",
+      "country": "ES",
+      "currency": "EUR",
+      "shipping_eur": 12.0,
+      "default_language": null
+    },
+    {
+      "name": "Pokebank",
+      "url": "https://pokebank.es",
+      "platform": "woocommerce",
+      "country": "ES",
+      "currency": "EUR",
+      "shipping_eur": 12.0,
+      "default_language": null,
+      "search": ""
+    },
+    {
+      "name": "PokeFamily",
+      "url": "https://pokefamily.nl",
+      "platform": "shopify",
+      "country": "NL",
+      "currency": "EUR",
+      "shipping_eur": 4.95,
+      "default_language": "EN"
+    },
+    {
+      "name": "Evocollects",
+      "url": "https://evocollects.nl",
+      "platform": "shopify",
+      "country": "NL",
+      "currency": "EUR",
+      "shipping_eur": 4.95,
+      "default_language": "EN"
+    },
+    {
+      "name": "Amanda TCG",
+      "url": "https://amandatcgshop.nl",
+      "platform": "woocommerce",
+      "country": "NL",
+      "currency": "EUR",
+      "shipping_eur": 4.95,
+      "default_language": "EN",
+      "search": ""
+    }
+  ],
+  "min_shops_for_market_estimate": 3,
+  "allowed_languages": [
+    "EN"
+  ],
+  "sell_price_priority": [
+    "your_price",
+    "shops_median",
+    "cardmarket_trend"
+  ]
+}

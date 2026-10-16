@@ -1,0 +1,794 @@
+[
+ {
+  "set": "Perfect Order",
+  "aliases": [
+   "perfect order"
+  ]
+ },
+ {
+  "set": "Chaos Rising",
+  "aliases": [
+   "chaos rising"
+  ]
+ },
+ {
+  "set": "Pitch Black",
+  "aliases": [
+   "pitch black",
+   "me05",
+   "me5"
+  ]
+ },
+ {
+  "set": "Ascended Heroes",
+  "aliases": [
+   "ascended heroes"
+  ]
+ },
+ {
+  "set": "Phantasmal Flames",
+  "aliases": [
+   "phantasmal flames"
+  ]
+ },
+ {
+  "set": "Mega Evolution",
+  "aliases": [
+   "mega evolution",
+   "mega-entwicklung",
+   "mega evolutie",
+   "mega-evolution"
+  ]
+ },
+ {
+  "set": "Black Bolt",
+  "aliases": [
+   "black bolt",
+   "schwarze blitze",
+   "foudre noire"
+  ]
+ },
+ {
+  "set": "White Flare",
+  "aliases": [
+   "white flare",
+   "weisse flamme",
+   "weiße flamme",
+   "flamme blanche"
+  ]
+ },
+ {
+  "set": "Destined Rivals",
+  "aliases": [
+   "destined rivals",
+   "ewige rivalen",
+   "rivalites destinees",
+   "sv10",
+   "ev10"
+  ]
+ },
+ {
+  "set": "Journey Together",
+  "aliases": [
+   "journey together",
+   "reisegefahrten",
+   "reisegefährten",
+   "aventures ensemble",
+   "sv09",
+   "sv9",
+   "ev09",
+   "ev9"
+  ]
+ },
+ {
+  "set": "Prismatic Evolutions",
+  "aliases": [
+   "prismatic evolutions",
+   "prismatische entwicklungen",
+   "prismatic evolution",
+   "evolutions prismatiques",
+   "sv8.5",
+   "sv08.5",
+   "ev8.5",
+   "ev08.5"
+  ]
+ },
+ {
+  "set": "Surging Sparks",
+  "aliases": [
+   "surging sparks",
+   "sturmische funken",
+   "stürmische funken",
+   "etincelles deferlantes",
+   "sv08",
+   "sv8",
+   "ev08",
+   "ev8"
+  ]
+ },
+ {
+  "set": "Stellar Crown",
+  "aliases": [
+   "stellar crown",
+   "stellarkrone",
+   "couronne stellaire",
+   "sv07",
+   "sv7",
+   "ev07",
+   "ev7"
+  ]
+ },
+ {
+  "set": "Shrouded Fable",
+  "aliases": [
+   "shrouded fable",
+   "nebel der sagen",
+   "fable nebuleuse",
+   "sv6.5",
+   "sv06.5",
+   "ev6.5",
+   "ev06.5"
+  ]
+ },
+ {
+  "set": "Twilight Masquerade",
+  "aliases": [
+   "twilight masquerade",
+   "maskerade im zwielicht",
+   "mascarade crepusculaire",
+   "sv06",
+   "sv6",
+   "ev06",
+   "ev6"
+  ]
+ },
+ {
+  "set": "Temporal Forces",
+  "aliases": [
+   "temporal forces",
+   "gewalten der zeit",
+   "forces temporelles",
+   "sv05",
+   "sv5",
+   "ev05",
+   "ev5"
+  ]
+ },
+ {
+  "set": "Paldean Fates",
+  "aliases": [
+   "paldean fates",
+   "paldeas schicksale",
+   "destinees de paldea",
+   "sv4.5",
+   "sv04.5",
+   "ev4.5",
+   "ev04.5"
+  ]
+ },
+ {
+  "set": "Paradox Rift",
+  "aliases": [
+   "paradox rift",
+   "paradoxrift",
+   "faille paradoxe",
+   "sv04",
+   "sv4",
+   "ev04",
+   "ev4"
+  ]
+ },
+ {
+  "set": "151",
+  "aliases": [
+   "scarlet & violet 151",
+   "scarlet and violet 151",
+   "sv 151",
+   "pokemon 151",
+   "karmesin & purpur 151",
+   "151",
+   "sv3.5",
+   "sv03.5",
+   "ev3.5",
+   "ev03.5"
+  ]
+ },
+ {
+  "set": "Obsidian Flames",
+  "aliases": [
+   "obsidian flames",
+   "obsidianflammen",
+   "flammes obsidiennes",
+   "sv03",
+   "sv3",
+   "ev03",
+   "ev3"
+  ]
+ },
+ {
+  "set": "Paldea Evolved",
+  "aliases": [
+   "paldea evolved",
+   "entwicklungen in paldea",
+   "evolutions a paldea",
+   "sv02",
+   "sv2",
+   "ev02",
+   "ev2"
+  ]
+ },
+ {
+  "set": "Scarlet & Violet Base",
+  "aliases": [
+   "scarlet & violet base",
+   "scarlet and violet base",
+   "karmesin & purpur base"
+  ]
+ },
+ {
+  "set": "Crown Zenith",
+  "aliases": [
+   "crown zenith",
+   "zenit der konige",
+   "zenit der könige",
+   "zenith supreme",
+   "eb12.5"
+  ]
+ },
+ {
+  "set": "Silver Tempest",
+  "aliases": [
+   "silver tempest",
+   "silberne sturmwinde",
+   "tempete argentee",
+   "eb12"
+  ]
+ },
+ {
+  "set": "Lost Origin",
+  "aliases": [
+   "lost origin",
+   "verlorener ursprung",
+   "origine perdue",
+   "eb11"
+  ]
+ },
+ {
+  "set": "Pokemon GO",
+  "aliases": [
+   "pokemon go"
+  ]
+ },
+ {
+  "set": "Astral Radiance",
+  "aliases": [
+   "astral radiance",
+   "astralglanz",
+   "astres radieux",
+   "eb10"
+  ]
+ },
+ {
+  "set": "Brilliant Stars",
+  "aliases": [
+   "brilliant stars",
+   "strahlende sterne",
+   "stars etincelantes",
+   "eb09"
+  ]
+ },
+ {
+  "set": "Fusion Strike",
+  "aliases": [
+   "fusion strike",
+   "fusionsangriff",
+   "poing de fusion",
+   "eb08"
+  ]
+ },
+ {
+  "set": "Celebrations",
+  "aliases": [
+   "celebrations",
+   "25th anniversary",
+   "25-jahre",
+   "fur fans",
+   "für fans"
+  ]
+ },
+ {
+  "set": "Evolving Skies",
+  "aliases": [
+   "evolving skies",
+   "drachenwandel",
+   "evolution celeste",
+   "eb07"
+  ]
+ },
+ {
+  "set": "Chilling Reign",
+  "aliases": [
+   "chilling reign",
+   "schaurige herrschaft",
+   "regne de glace",
+   "eb06"
+  ]
+ },
+ {
+  "set": "Battle Styles",
+  "aliases": [
+   "battle styles",
+   "kampfstile",
+   "styles de combat",
+   "eb05"
+  ]
+ },
+ {
+  "set": "Shining Fates",
+  "aliases": [
+   "shining fates",
+   "glanzende schicksale",
+   "glänzende schicksale",
+   "destinees radieuses",
+   "eb4.5"
+  ]
+ },
+ {
+  "set": "Hidden Fates",
+  "aliases": [
+   "hidden fates"
+  ]
+ },
+ {
+  "set": "30th Celebration",
+  "aliases": [
+   "30th celebration",
+   "30th anniversary",
+   "30 jahre",
+   "30 aniversario",
+   "30 anniversario",
+   "30o anniversario",
+   "30e anniversaire",
+   "30ieme anniversaire",
+   "30 ans",
+   "30 jaar",
+   "30th anniversary celebration"
+  ]
+ },
+ {
+  "set": "JP Mega Dream ex",
+  "aliases": [
+   "mega dream"
+  ]
+ },
+ {
+  "set": "JP Inferno X",
+  "aliases": [
+   "inferno x"
+  ]
+ },
+ {
+  "set": "JP Mega Brave",
+  "aliases": [
+   "mega brave"
+  ]
+ },
+ {
+  "set": "JP Mega Symphonia",
+  "aliases": [
+   "mega symphonia"
+  ]
+ },
+ {
+  "set": "JP Terastal Festival ex",
+  "aliases": [
+   "terastal festival",
+   "terastal fest"
+  ]
+ },
+ {
+  "set": "JP Battle Partners",
+  "aliases": [
+   "battle partners"
+  ]
+ },
+ {
+  "set": "JP Heat Wave Arena",
+  "aliases": [
+   "heat wave arena"
+  ]
+ },
+ {
+  "set": "JP Glory of Team Rocket",
+  "aliases": [
+   "glory of team rocket"
+  ]
+ },
+ {
+  "set": "JP Super Electric Breaker",
+  "aliases": [
+   "super electric breaker"
+  ]
+ },
+ {
+  "set": "JP Paradise Dragona",
+  "aliases": [
+   "paradise dragona"
+  ]
+ },
+ {
+  "set": "JP Night Wanderer",
+  "aliases": [
+   "night wanderer"
+  ]
+ },
+ {
+  "set": "JP Stellar Miracle",
+  "aliases": [
+   "stellar miracle"
+  ]
+ },
+ {
+  "set": "JP Shiny Treasure ex",
+  "aliases": [
+   "shiny treasure"
+  ]
+ },
+ {
+  "set": "JP Crimson Haze",
+  "aliases": [
+   "crimson haze"
+  ]
+ },
+ {
+  "set": "JP Mask of Change",
+  "aliases": [
+   "mask of change"
+  ]
+ },
+ {
+  "set": "JP Cyber Judge",
+  "aliases": [
+   "cyber judge"
+  ]
+ },
+ {
+  "set": "JP Wild Force",
+  "aliases": [
+   "wild force"
+  ]
+ },
+ {
+  "set": "JP Raging Surf",
+  "aliases": [
+   "raging surf"
+  ]
+ },
+ {
+  "set": "JP Ancient Roar",
+  "aliases": [
+   "ancient roar"
+  ]
+ },
+ {
+  "set": "JP Future Flash",
+  "aliases": [
+   "future flash"
+  ]
+ },
+ {
+  "set": "JP Clay Burst",
+  "aliases": [
+   "clay burst"
+  ]
+ },
+ {
+  "set": "JP Snow Hazard",
+  "aliases": [
+   "snow hazard"
+  ]
+ },
+ {
+  "set": "JP VSTAR Universe",
+  "aliases": [
+   "vstar universe"
+  ]
+ },
+ {
+  "set": "JP VMAX Climax",
+  "aliases": [
+   "vmax climax"
+  ]
+ },
+ {
+  "set": "JP Eevee Heroes",
+  "aliases": [
+   "eevee heroes"
+  ]
+ },
+ {
+  "set": "Sword & Shield Base",
+  "aliases": [
+   "sword & shield base",
+   "sword and shield base",
+   "sword & shield - base",
+   "schwert & schild base"
+  ]
+ },
+ {
+  "set": "Rebel Clash",
+  "aliases": [
+   "rebel clash",
+   "clash der rebellen"
+  ]
+ },
+ {
+  "set": "Darkness Ablaze",
+  "aliases": [
+   "darkness ablaze",
+   "flammende finsternis"
+  ]
+ },
+ {
+  "set": "Champion's Path",
+  "aliases": [
+   "champion's path",
+   "champions path",
+   "weg des champs"
+  ]
+ },
+ {
+  "set": "Vivid Voltage",
+  "aliases": [
+   "vivid voltage",
+   "farbenschock"
+  ]
+ },
+ {
+  "set": "Cosmic Eclipse",
+  "aliases": [
+   "cosmic eclipse"
+  ]
+ },
+ {
+  "set": "Unified Minds",
+  "aliases": [
+   "unified minds"
+  ]
+ },
+ {
+  "set": "Unbroken Bonds",
+  "aliases": [
+   "unbroken bonds"
+  ]
+ },
+ {
+  "set": "Team Up",
+  "aliases": [
+   "team up"
+  ]
+ },
+ {
+  "set": "Lost Thunder",
+  "aliases": [
+   "lost thunder"
+  ]
+ },
+ {
+  "set": "Dragon Majesty",
+  "aliases": [
+   "dragon majesty"
+  ]
+ },
+ {
+  "set": "Celestial Storm",
+  "aliases": [
+   "celestial storm"
+  ]
+ },
+ {
+  "set": "Forbidden Light",
+  "aliases": [
+   "forbidden light"
+  ]
+ },
+ {
+  "set": "Ultra Prism",
+  "aliases": [
+   "ultra prism"
+  ]
+ },
+ {
+  "set": "Crimson Invasion",
+  "aliases": [
+   "crimson invasion"
+  ]
+ },
+ {
+  "set": "Shining Legends",
+  "aliases": [
+   "shining legends",
+   "legendes brillantes"
+  ]
+ },
+ {
+  "set": "Burning Shadows",
+  "aliases": [
+   "burning shadows"
+  ]
+ },
+ {
+  "set": "Guardians Rising",
+  "aliases": [
+   "guardians rising"
+  ]
+ },
+ {
+  "set": "Sun & Moon Base",
+  "aliases": [
+   "sun & moon - base",
+   "sun & moon base",
+   "sun and moon base"
+  ]
+ },
+ {
+  "set": "Evolutions",
+  "aliases": [
+   "xy evolutions",
+   "xy - evolutions"
+  ]
+ },
+ {
+  "set": "Roaring Skies",
+  "aliases": [
+   "roaring skies"
+  ]
+ },
+ {
+  "set": "Flashfire",
+  "aliases": [
+   "flashfire"
+  ]
+ },
+ {
+  "set": "Generations",
+  "aliases": [
+   "generations"
+  ]
+ },
+ {
+  "set": "Steam Siege",
+  "aliases": [
+   "steam siege"
+  ]
+ },
+ {
+  "set": "Fates Collide",
+  "aliases": [
+   "fates collide"
+  ]
+ },
+ {
+  "set": "BREAKpoint",
+  "aliases": [
+   "breakpoint"
+  ]
+ },
+ {
+  "set": "BREAKthrough",
+  "aliases": [
+   "breakthrough"
+  ]
+ },
+ {
+  "set": "Ancient Origins",
+  "aliases": [
+   "ancient origins"
+  ]
+ },
+ {
+  "set": "Primal Clash",
+  "aliases": [
+   "primal clash"
+  ]
+ },
+ {
+  "set": "Phantom Forces",
+  "aliases": [
+   "phantom forces"
+  ]
+ },
+ {
+  "set": "Furious Fists",
+  "aliases": [
+   "furious fists"
+  ]
+ },
+ {
+  "set": "JP Triplet Beat",
+  "aliases": [
+   "triplet beat",
+   "triple beat",
+   "sv1a"
+  ]
+ },
+ {
+  "set": "JP Abyss Eye",
+  "aliases": [
+   "abyss eye"
+  ]
+ },
+ {
+  "set": "JP Time Gazer",
+  "aliases": [
+   "time gazer"
+  ]
+ },
+ {
+  "set": "JP Space Juggler",
+  "aliases": [
+   "space juggler"
+  ]
+ },
+ {
+  "set": "JP Star Birth",
+  "aliases": [
+   "star birth"
+  ]
+ },
+ {
+  "set": "JP Battle Region",
+  "aliases": [
+   "battle region"
+  ]
+ },
+ {
+  "set": "JP Dark Phantasma",
+  "aliases": [
+   "dark phantasma"
+  ]
+ },
+ {
+  "set": "JP Lost Abyss",
+  "aliases": [
+   "lost abyss"
+  ]
+ },
+ {
+  "set": "JP Incandescent Arcana",
+  "aliases": [
+   "incandescent arcana"
+  ]
+ },
+ {
+  "set": "JP Paradigm Trigger",
+  "aliases": [
+   "paradigm trigger"
+  ]
+ },
+ {
+  "set": "JP Blue Sky Stream",
+  "aliases": [
+   "blue sky stream"
+  ]
+ },
+ {
+  "set": "JP Fusion Arts",
+  "aliases": [
+   "fusion arts"
+  ]
+ },
+ {
+  "set": "JP Shiny Star V",
+  "aliases": [
+   "shiny star v"
+  ]
+ },
+ {
+  "set": "JP Pokemon Card 151",
+  "aliases": [
+   "sv2a",
+   "pokemon card 151"
+  ]
+ }
+]
