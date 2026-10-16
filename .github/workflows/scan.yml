@@ -29,6 +29,8 @@ jobs:
           python-version: "3.12"
 
       - name: Run scanner
+        env:
+          TZ: Europe/Amsterdam
         run: python3 scan.py
 
       - name: Save price history
@@ -43,6 +45,7 @@ jobs:
         run: |
           mkdir -p site
           cp output/report.html site/index.html
+          cp output/scan.json site/
           cp output/deals.csv output/products_to_price.csv data/history.csv site/
 
       - uses: actions/upload-pages-artifact@v3

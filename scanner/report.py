@@ -53,7 +53,7 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
 <div class="status" id="status"></div>
 </main>
 <script>
-const RUN_URL=__RUNURL__, ROWS=__ROWS__, STATUS=__STATUS__, HL=__HL__;
+const STAMP=__STAMPJS__, RUN_URL=__RUNURL__, ROWS=__ROWS__, STATUS=__STATUS__, HL=__HL__;
 const $=id=>document.getElementById(id);
 const eur=v=>v==null?'–':'€'+v.toFixed(2);
 const pct=v=>v==null?'–':(v*100).toFixed(0)+'%';
@@ -129,8 +129,18 @@ runBtn.onclick=async()=>{
 const isLocalApp=['127.0.0.1','localhost'].includes(location.hostname);
 if(!isLocalApp && RUN_URL && location.protocol.startsWith('http')){
   // Hosted version: scans run on GitHub. The button opens the workflow page with its "Run workflow" button.
-  runBtn.onclick=()=>window.open(RUN_URL,'_blank','noopener');
-  runSt.textContent='Opens GitHub → click "Run workflow". New results appear here ~5 min later.';
+  runBtn.onclick=()=>{ window.open(RUN_URL,'_blank','noopener'); runSt.textContent='Waiting for the new scan… this page updates by itself (~3–5 min).'; };
+  runSt.textContent='Opens GitHub → click "Run workflow". This page updates by itself when the scan is done.';
+  // GitHub Pages lets browsers cache the page for 10 min. Check a tiny file (bypassing caches)
+  // and load the fresh page as soon as a newer scan is published.
+  async function checkNewer(){
+    try{
+      const r=await fetch('scan.json?t='+Date.now(),{cache:'no-store'});
+      if(r.ok){ const s=await r.json(); if(s.stamp && s.stamp!==STAMP){ location.replace(location.pathname+'?v='+encodeURIComponent(s.stamp)); return; } }
+    }catch(e){}
+    setTimeout(checkNewer,30000);
+  }
+  checkNewer();
 } else if(location.protocol==='file:' || !isLocalApp){ runBtn.disabled=true; runSt.textContent='To scan from here, start the app: python3 app.py'; }
 else poll();
 </script></body></html>"""
@@ -146,6 +156,7 @@ def write_report(path, rows, status, cfg, stamp, fx_source, run_url=""):
             .replace("__ROWS__", _js(rows))
             .replace("__STATUS__", _js(sorted(status, key=lambda s: s["shop"])))
             .replace("__RUNURL__", _js(run_url))
+            .replace("__STAMPJS__", _js(stamp))
             .replace("__HL__", str(cfg["min_margin_pct_highlight"]))
             .replace("__STAMP__", stamp)
             .replace("__NSHOPS__", str(len(status)))

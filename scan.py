@@ -13,7 +13,7 @@ import statistics
 import urllib.parse
 import sys
 from concurrent.futures import ThreadPoolExecutor, as_completed
-from datetime import datetime
+import time
 from pathlib import Path
 
 from scanner.cardmarket import load_reference
@@ -222,7 +222,7 @@ def main():
 
     cfg = json.loads((ROOT / "config.json").read_text(encoding="utf-8"))
     sell_prices = load_sell_prices(ROOT / "data" / "sell_prices.csv")
-    stamp = datetime.now().strftime("%Y-%m-%d %H:%M")
+    stamp = time.strftime("%Y-%m-%d %H:%M %Z")  # local time; the GitHub workflow sets TZ=Europe/Amsterdam
     print(f"Scanning {len(cfg['shops'])} shops…")
     rows, status, fx_source, cm = scan(cfg, args.in_stock)
     market = add_margins(rows, cfg, sell_prices, cm)
@@ -230,6 +230,8 @@ def main():
     repo = os.environ.get("GITHUB_REPOSITORY")
     run_url = f"https://github.com/{repo}/actions/workflows/scan.yml" if repo else ""
     write_report(OUT / "report.html", rows, status, cfg, stamp, fx_source, run_url)
+    # Tiny file the hosted page checks to see whether a newer scan exists.
+    (OUT / "scan.json").write_text(json.dumps({"stamp": stamp}), encoding="utf-8")
 
     deals = [r for r in rows if r["in_stock"] and (r["margin_pct"] or 0) >= cfg["min_margin_pct_highlight"]]
     print(f"\n{len(rows)} sealed offers · {len(market)} products compared · {len(deals)} in-stock deals ≥ "
