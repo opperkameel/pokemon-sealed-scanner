@@ -29,8 +29,11 @@ Use `python3 scan.py --in-stock` to keep only products you can buy right now.
 
 - **Report:** https://opperkameel.github.io/pokemon-sealed-scanner/
 - **Automatic scan:** every morning at about 07:00.
-- **Scan now:** click **Run now** in the online report (or go to the repo → *Actions* → *Scan* → **Run workflow**).
-  The new report is online about 5 minutes later; refresh the page.
+- **Scan now:** click **Run now** in the online report. The scan starts on GitHub, the button shows its progress,
+  and the page loads the new results by itself (~3 min).
+  The first time on each device, the page asks for a GitHub token (one-time setup, the page explains the steps):
+  fine-grained, *Only select repositories* → this repo, *Actions: Read and write*. It is stored only in that browser.
+  Without a token you can still start a scan on GitHub: repo → *Actions* → *Scan* → **Run workflow**.
 - The online report and this code are public (GitHub free plan). Your own sell prices in `data/sell_prices.csv`
   would be public too once you push them. To make everything private, upgrade to GitHub Pro and make the repo private.
 - Changed something locally (shops, sets, sell prices)? Push it and the next scan uses it:

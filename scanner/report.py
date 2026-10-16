@@ -128,19 +128,82 @@ runBtn.onclick=async()=>{
 };
 const isLocalApp=['127.0.0.1','localhost'].includes(location.hostname);
 if(!isLocalApp && RUN_URL && location.protocol.startsWith('http')){
-  // Hosted version: scans run on GitHub. The button opens the workflow page with its "Run workflow" button.
-  runBtn.onclick=()=>{ window.open(RUN_URL,'_blank','noopener'); runSt.textContent='Waiting for the new scan… this page updates by itself (~3–5 min).'; };
-  runSt.textContent='Opens GitHub → click "Run workflow". This page updates by itself when the scan is done.';
+  // Hosted version: "Run now" starts the GitHub workflow through the GitHub API.
+  // It needs a GitHub token that the owner pastes once; it is kept only in this browser (localStorage).
+  const REPO=RUN_URL.split('github.com/')[1].split('/actions')[0], OWNER=REPO.split('/')[0];
+  const API='https://api.github.com/repos/'+REPO+'/actions';
+  const KEY='scanner_github_token';
+  const getTok=()=>{try{return localStorage.getItem(KEY)||''}catch(e){return ''}};
+  const setTok=v=>{try{v?localStorage.setItem(KEY,v):localStorage.removeItem(KEY)}catch(e){}};
+  const gh=(path,opt={})=>fetch(API+path,{...opt,cache:'no-store',headers:{'Accept':'application/vnd.github+json','Authorization':'Bearer '+getTok(),...(opt.headers||{})}});
+
+  const panel=document.createElement('div');
+  panel.style.cssText='display:none;max-width:1400px;margin:0 auto 6px;padding:0 16px';
+  panel.innerHTML=`<div style="background:var(--card);border:1px solid var(--line);border-radius:10px;padding:14px 16px">
+    <b>One-time setup on this device</b>
+    <ol style="margin:8px 0;padding-left:20px;line-height:1.7">
+      <li><a id="tokLink" target="_blank" rel="noopener">Create a GitHub token</a> (opens GitHub). Under <i>Repository access</i> choose <b>Only select repositories</b> → <b>${esc(REPO.split('/')[1])}</b>.
+      Under <i>Permissions</i> set <b>Actions</b> to <b>Read and write</b>. Click <b>Generate token</b> and copy it.</li>
+      <li>Paste it here: <input id="tokIn" type="password" placeholder="github_pat_…" style="font:inherit;padding:5px 8px;border:1px solid var(--line);border-radius:6px;background:var(--bg);color:var(--ink);width:260px">
+      <button id="tokSave" style="font:inherit;padding:5px 12px;border-radius:6px;border:1px solid var(--line);background:var(--ink);color:var(--bg);cursor:pointer">Save &amp; run</button></li>
+    </ol>
+    <span style="color:var(--mute);font-size:12px">The token is stored only in this browser. It can only start scans of this repository. <a href="#" id="tokCancel">Cancel</a></span>
+  </div>`;
+  document.querySelector('header').after(panel);
+  $('tokLink').href='https://github.com/settings/personal-access-tokens/new?name=Pokemon+scanner+Run+now&description=Run+now+button+of+the+scanner+report&target_name='+encodeURIComponent(OWNER)+'&expires_in=365&actions=write';
+  $('tokCancel').onclick=e=>{e.preventDefault();panel.style.display='none';runSt.textContent='';};
+  $('tokSave').onclick=()=>{const v=$('tokIn').value.trim(); if(!v) return; setTok(v); $('tokIn').value=''; panel.style.display='none'; startRun();};
+
+  let since=0;
+  function busy(msg){ runBtn.disabled=true; runBtn.textContent='Scanning…'; runSt.textContent=msg; }
+  function idle(msg){ runBtn.disabled=false; runBtn.textContent='Run now'; runSt.innerHTML=msg||''; }
+  function badToken(status){
+    setTok('');
+    idle(status===401?'Your GitHub token is invalid or expired. Click Run now to add a new one.'
+                     :'Your GitHub token may not start scans (needs Actions: Read and write on this repository). Click Run now to add a new one.');
+  }
+  async function startRun(){
+    if(!getTok()){ panel.style.display='block'; runSt.textContent='Set up once to start scans from here.'; return; }
+    busy('Starting scan on GitHub…');
+    try{
+      since=Date.now()-60000;
+      const r=await gh('/workflows/scan.yml/dispatches',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({ref:'main'})});
+      if(r.status===401||r.status===403||r.status===404) return badToken(r.status);
+      if(!r.ok) return idle('GitHub refused the request ('+r.status+'). <a href="'+RUN_URL+'" target="_blank" rel="noopener">Open GitHub</a>');
+      setTimeout(track,4000);
+    }catch(e){ idle('Could not reach GitHub. Check your connection and try again.'); }
+  }
+  async function track(){
+    try{
+      const r=await gh('/runs?per_page=5');
+      if(r.status===401||r.status===403) return badToken(r.status);
+      const run=((await r.json()).workflow_runs||[]).find(x=>new Date(x.created_at).getTime()>=since);
+      if(!run){ busy('Waiting for GitHub to start the scan…'); return setTimeout(track,5000); }
+      if(run.status!=='completed'){
+        const secs=Math.round((Date.now()-new Date(run.run_started_at||run.created_at).getTime())/1000);
+        busy(run.status==='in_progress'?`Scanning all shops… ${Math.floor(secs/60)}:${String(secs%60).padStart(2,'0')} (takes ~2–3 min)`:'Queued at GitHub…');
+        return setTimeout(track,8000);
+      }
+      if(run.conclusion==='success'){ busy('Done, loading new results…'); return checkNewer(true); }
+      idle(`Scan failed. <a href="${esc(run.html_url)}" target="_blank" rel="noopener">See details on GitHub</a>`);
+    }catch(e){ setTimeout(track,10000); }
+  }
+  runBtn.onclick=startRun;
+
   // GitHub Pages lets browsers cache the page for 10 min. Check a tiny file (bypassing caches)
   // and load the fresh page as soon as a newer scan is published.
-  async function checkNewer(){
+  async function checkNewer(fast){
     try{
       const r=await fetch('scan.json?t='+Date.now(),{cache:'no-store'});
       if(r.ok){ const s=await r.json(); if(s.stamp && s.stamp!==STAMP){ location.replace(location.pathname+'?v='+encodeURIComponent(s.stamp)); return; } }
     }catch(e){}
-    setTimeout(checkNewer,30000);
+    setTimeout(()=>checkNewer(fast),fast?5000:30000);
   }
   checkNewer();
+  // A scan already running (e.g. the morning one, or started on another device)? Show its progress.
+  if(getTok()){ since=Date.now()-15*60000; gh('/runs?per_page=1').then(r=>r.ok?r.json():null).then(d=>{
+    const run=d&&d.workflow_runs&&d.workflow_runs[0]; if(run&&run.status!=='completed'){ since=new Date(run.created_at).getTime(); track(); }
+  }).catch(()=>{}); }
 } else if(location.protocol==='file:' || !isLocalApp){ runBtn.disabled=true; runSt.textContent='To scan from here, start the app: python3 app.py'; }
 else poll();
 </script></body></html>"""
