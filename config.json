@@ -185,7 +185,9 @@
       "currency": "EUR",
       "shipping_eur": 6.95,
       "default_language": null,
-      "search": ""
+      "search": "",
+      "disabled": true,
+      "_note": "Blocks GitHub's servers (403); only ~3 English offers."
     },
     {
       "name": "CrispyCards",
