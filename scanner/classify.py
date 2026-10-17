@@ -22,7 +22,10 @@ EXCLUDE = re.compile(
     r"display case|\bprotector\b|\bmagnetic\b|\bcard case\b|\bstorage\b|\balbum\b|\bdice\b|"
     r"\bpsa\b|\bcgc\b|\bbgs\b|\bgraded\b|\bplush\b|\bknuffel\b|\bfigure\b|\bpuzzle\b|"
     r"\bt-shirt\b|\bhoodie\b|\bmyst?ery\b|\bmistery\b|\bvoucher\b|gift ?card|\bempty\b|\bleeg\b|"
-    r"\bcode card\b|dobbelstenen|\bguide\b|\bguia\b|energy (game|battle)|pack ?battle|\bbreak\b|\bstickers?\b(?!.*collection)|\bonline code\b|\bjumbo card\b|\bsingles?\b|reverse holo|\bart card\b"
+    r"\bcode card\b|dobbelstenen|\bguide\b|\bguia\b|energy (game|battle)|pack ?battle|\bbreak\b|\bstickers?\b(?!.*collection)|\bonline code\b|\bjumbo card\b|\bsingles?\b|reverse holo|\bart card\b|"
+    r"\bacryl|\bfun ?packs?\b|"
+    # Damaged or opened stock is not comparable with a normal sealed offer.
+    r"\bschade\b|beschadigd|gedeukt|\bdeuk|\bscheur|fabrieksfout|losse seal|\bdamaged\b|\bdented\b|\bopened\b|\bgeopend\b|\bkapot\b"
 )
 CARD_NUMBER = re.compile(r"\b\d{1,3}/\d{2,3}\b")
 
@@ -32,8 +35,8 @@ TYPES = [
                     r"\b(booster box|display|elite trainer box|etb)\b.*\bcase\b|\bsealed case\b|"
                     r"\bdisplay\b.*\b(mini.?tins?|tins?|blisters?|bundles?|etbs?)\b|\b(tins?|blisters?)\b.*\bdisplay\b|"
                     r"\b([2-9]|[1-9]\d) ?x? ?(bundles?|tins?|blisters?|etbs?|elite trainer boxes|displays?|booster boxes)\b|"
-                    r"\b(bundle|blister) box\b|\bx ?([2-9]|[1-9]\d) (bundles?|tins?|blisters?|displays?)\b"),
-    ("Half Booster Box", r"half booster ?box|halbes display|\b18 ?er\b|\b18 ?(x )?(booster|pack)s?\b|\b(18|half)[- ]?display\b"),
+                    r"\b(bundle|blister) box\b|\bbundles? display\b|\bx ?([2-9]|[1-9]\d) (bundles?|tins?|blisters?|displays?)\b"),
+    ("Half Booster Box", r"half booster ?box|halve booster ?box|halve display|halbes display|\b18 ?er\b|\b18 ?(x )?(booster|pack)s?\b|\b(18|half)[- ]?display\b"),
     ("Build & Battle Stadium", r"build (&|and|n) battle stadium"),
     ("Blister", r"checklane"),
     ("Pokemon Center ETB", r"pokemon center.*(elite trainer|\betb\b|top.?trainer)"),
