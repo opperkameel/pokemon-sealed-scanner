@@ -1,0 +1,24 @@
+name: Test scan (branch)
+on:
+  push:
+    branches: [more-be-nl-shops]
+jobs:
+  scan:
+    runs-on: ubuntu-latest
+    timeout-minutes: 25
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - run: time python3 -u scan.py
+        env:
+          TZ: Europe/Amsterdam
+      - run: |
+          python3 - <<'PY'
+          import csv, collections
+          rows=list(csv.DictReader(open('output/deals.csv')))
+          c=collections.Counter((r['shop'], r['in_stock']) for r in rows)
+          for shop in sorted({r['shop'] for r in rows}):
+              print(f"{shop:22} offers {c[(shop,'True')]+c[(shop,'False')]:4}  in stock {c[(shop,'True')]:4}  best-in-EU {sum(1 for r in rows if r['shop']==shop and r['best_in_europe']=='True')}")
+          PY
