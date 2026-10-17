@@ -137,7 +137,7 @@
       "country": "BE",
       "currency": "EUR",
       "shipping_eur": 6.95,
-      "default_language": null,
+      "default_language": "EN",
       "search": ""
     },
     {
@@ -432,7 +432,9 @@
       "country": "NL",
       "currency": "EUR",
       "shipping_eur": 4.95,
-      "default_language": "EN"
+      "default_language": "EN",
+      "disabled": true,
+      "_note": "Blocks GitHub (403). Works from a home connection: remove disabled when you run the scanner locally."
     },
     {
       "name": "MegaWereld",

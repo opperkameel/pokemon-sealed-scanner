@@ -132,6 +132,9 @@ class Classifier:
             # Only trust that when it names exactly one language.
             found = _all_languages(context)
             lang = found.pop() if len(found) == 1 else None
+            if lang is None and found - {"EN"} and default_language == "EN":
+                return {"set": pset or "Unknown set", "type": ptype, "language": "?",
+                        "preorder": bool(PREORDER.search(t)), "group": None}
         if pset and pset.startswith("JP "):
             lang = lang or "JP"
         if lang is None and default_language:

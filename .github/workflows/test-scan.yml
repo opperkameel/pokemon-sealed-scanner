@@ -21,4 +21,9 @@ jobs:
           c=collections.Counter((r['shop'], r['in_stock']) for r in rows)
           for shop in sorted({r['shop'] for r in rows}):
               print(f"{shop:22} offers {c[(shop,'True')]+c[(shop,'False')]:4}  in stock {c[(shop,'True')]:4}  best-in-EU {sum(1 for r in rows if r['shop']==shop and r['best_in_europe']=='True')}")
+          new={'De Broer Grot','Kingcards','Rarecards','TCGReus','PokePlaza','TCG World','Pack2Pack','Spelgenot','Fantasy World','Cardstore','MegaWereld','Pokemonkaarten.nl','CardCave','Boosterbox.nl','Dracoon','Queen of Games','WildCards','Pokemart','Maximus'}
+          print('--- best in EU, new shops ---')
+          for r in rows:
+              if r['shop'] in new and r['best_in_europe']=='True':
+                  print(f"{r['shop']:16} {r['set'][:22]:22} {r['type'][:18]:18} {r['price_eur']:>8} med {r['market_median_eur']:>8} n{r['shops_in_stock']} chk={r['check']} | {r['title'][:60]}")
           PY
