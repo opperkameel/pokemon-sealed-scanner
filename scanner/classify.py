@@ -52,19 +52,28 @@ TYPES = [
 TYPES = [(name, re.compile(rx)) for name, rx in TYPES]
 
 LANG_WORDS = [
-    ("JP", r"japanese|japans|japanisch|japonais|giapponese|japones"),
-    ("KR", r"korean|koreaans|koreanisch|coreano"),
-    ("CN", r"chinese|chinees|chinesisch|s-chinese|t-chinese|chino|cinese"),
-    ("DE", r"german|deutsch|duits|allemand"),
-    ("FR", r"french|franzosisch|frans|francais|francaise"),
-    ("IT", r"italian|italienisch|italiaans|italiano"),
-    ("ES", r"spanish|spanisch|spaans|espanol|castellano"),
-    ("EN", r"english|englisch|engels|anglais|inglese|ingles|englische|englischer|englisches"),
+    ("JP", r"japanese|japanse|japans|japanisch|japonais|giapponese|japones"),
+    ("KR", r"korean|koreaanse|koreaans|koreanisch|coreano"),
+    ("CN", r"chinese|chinees|simplified chinese|traditional chinese|chinesisch|s-chinese|t-chinese|chino|cinese"),
+    ("DE", r"german|deutsch|duitse|duits|allemand"),
+    ("FR", r"french|franzosisch|franstalig|franse|frans|francais|francaise"),
+    ("IT", r"italian|italienisch|italiaanse|italiaans|italiano"),
+    ("ES", r"spanish|spanisch|spaanse|spaans|espanol|castellano"),
+    ("EN", r"english|englisch|engelstalig|engelse|engels|anglais|inglese|ingles|englische|englischer|englisches"),
 ]
 LANG_WORDS = [(code, re.compile(r"\b(" + rx + r")\b")) for code, rx in LANG_WORDS]
 # Two-letter codes only count in UPPERCASE ("de" is also a Dutch/French word).
 LANG_CODE = re.compile(r"(?<![A-Za-z])(EN|ENG|DE|GER|FR|FRA|IT|ITA|ES|ESP|SPA|JP|JPN|JAP|KR|KOR|CN)(?![A-Za-z])")
 CODE_MAP = {"ENG": "EN", "GER": "DE", "JPN": "JP", "JAP": "JP", "KOR": "KR", "ITA": "IT", "FRA": "FR", "ESP": "ES", "SPA": "ES"}
+
+# Other spellings of English (or Dutch, which has no own print run) set names.
+ENGLISH_VARIANTS = {"mega evolutie", "mega-evolution", "prismatic evolution", "paradoxrift", "scarlet and violet base",
+                    "champions path", "sword and shield base", "sword & shield - base", "sun & moon - base",
+                    "sun and moon base", "xy evolutions", "xy - evolutions"}
+
+# Product words that only appear in non-English listings.
+FOREIGN_WORDS = re.compile(r"\bcoffret\b|\bdresseur\b|sammel|kollektion|\bdose\b|\bsobre\b|\bcaja\b|coleccion|collezione|"
+                           r"\bscatola\b|\bbusta\b|\bdisplay de\b|top.?trainer|\bbooster.?display\b.*\b(de|fr)\b")
 
 PREORDER = re.compile(r"pre-?order|preorder|voorverkoop|vorbestellung|vorverkauf|precommande|releasedatum|release date")
 
@@ -92,6 +101,10 @@ class Classifier:
                 aliases.append((normalize(a), s["set"]))
         aliases.sort(key=lambda x: -len(x[0]))  # longest alias first
         self.aliases = [(re.compile(r"(?<![a-z0-9])" + re.escape(a) + r"(?![a-z0-9])"), name) for a, name in aliases]
+        # Aliases that tell nothing about the language: the English set name itself, or a set code (sv8.5, me05).
+        self.neutral = {(normalize(s["set"]), s["set"]) for s in sets}
+        self.neutral |= {(a, name) for a, name in aliases if re.search(r"\d", a) or a in ENGLISH_VARIANTS
+                         or name.startswith("JP ")}
 
     def classify(self, title, context="", default_language=None):
         """Return dict or None when it's not a sealed Pokémon product."""
@@ -111,6 +124,7 @@ class Classifier:
         # Drop names that sit inside a longer match ("151" inside "pokemon card 151").
         hits = [h for h in hits if not any(o[0] <= h[0] and h[1] <= o[1] and o[1] - o[0] > h[1] - h[0] for o in hits)]
         pset = max(hits)[2] if hits else None
+        alias_hit = t[max(hits)[0]:max(hits)[1]] if hits else None
 
         lang = _language(title, t)
         if lang is None and context:
@@ -120,7 +134,12 @@ class Classifier:
             lang = found.pop() if len(found) == 1 else None
         if pset and pset.startswith("JP "):
             lang = lang or "JP"
-        lang = lang or default_language or "?"
+        if lang is None and default_language:
+            # A shop's default language only applies when nothing in the title points to another
+            # language: a German/French/Spanish set name or product word means it is not the default.
+            foreign = (pset and (alias_hit, pset) not in self.neutral) or FOREIGN_WORDS.search(t)
+            lang = None if foreign and default_language == "EN" else default_language
+        lang = lang or "?"
 
         return {
             "set": pset or "Unknown set",
