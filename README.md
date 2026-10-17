@@ -1,6 +1,6 @@
 # Sealed Pokémon Scanner (EU)
 
-Scans 34 EU webshops (NL, BE, DE, FR, IT, ES) for **English** sealed Pokémon product (booster boxes, ETBs,
+Scans 52 EU webshops (NL, BE, DE, FR, IT, ES; 30 of them Belgian or Dutch) for **English** sealed Pokémon product (booster boxes, ETBs,
 bundles, tins, blisters, collections), finds the cheapest in-stock offer per product across Europe, compares it
 with Cardmarket, and calculates your margin.
 
@@ -83,6 +83,10 @@ If the shop only sells Pokémon and doesn't put "Pokémon" in its product titles
 To pause a shop, add `"disabled": true`.
 
 Shops on other platforms (Shopware, Magento, custom sites) need their own adapter in `scanner/sources.py`.
+
+Shops behind Cloudflare bot protection (for example Catch Your Cards and TCG Kingdom) block automated visitors,
+so they can't be scanned, also not from GitHub. TCG Company blocks GitHub's servers but works from a home
+connection: it is in `config.json` with `"disabled": true`; remove that line when you run the scanner on your Mac.
 
 ## English only
 

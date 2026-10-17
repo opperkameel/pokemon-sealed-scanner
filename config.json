@@ -137,7 +137,7 @@
       "country": "BE",
       "currency": "EUR",
       "shipping_eur": 6.95,
-      "default_language": null,
+      "default_language": "EN",
       "search": ""
     },
     {
@@ -334,6 +334,181 @@
       "shipping_eur": 4.95,
       "default_language": "EN",
       "search": ""
+    },
+    {
+      "name": "De Broer Grot",
+      "url": "https://debroergrot.nl",
+      "platform": "shopify",
+      "country": "NL",
+      "currency": "EUR",
+      "shipping_eur": 4.95,
+      "default_language": "EN"
+    },
+    {
+      "name": "Kingcards",
+      "url": "https://kingcards.nl",
+      "platform": "shopify",
+      "country": "NL",
+      "currency": "EUR",
+      "shipping_eur": 4.95,
+      "default_language": "EN"
+    },
+    {
+      "name": "Rarecards",
+      "url": "https://rarecards.nl",
+      "platform": "shopify",
+      "country": "NL",
+      "currency": "EUR",
+      "shipping_eur": 4.95,
+      "default_language": "EN"
+    },
+    {
+      "name": "TCGReus",
+      "url": "https://tcgreus.nl",
+      "platform": "shopify",
+      "country": "NL",
+      "currency": "EUR",
+      "shipping_eur": 4.95,
+      "default_language": "EN"
+    },
+    {
+      "name": "PokePlaza",
+      "url": "https://pokeplaza.nl",
+      "platform": "shopify",
+      "country": "NL",
+      "currency": "EUR",
+      "shipping_eur": 4.95,
+      "default_language": "EN"
+    },
+    {
+      "name": "TCG World",
+      "url": "https://tcgworld.nl",
+      "platform": "shopify",
+      "country": "NL",
+      "currency": "EUR",
+      "shipping_eur": 4.95,
+      "default_language": "EN"
+    },
+    {
+      "name": "Pack2Pack",
+      "url": "https://pack2pack.be",
+      "platform": "shopify",
+      "country": "BE",
+      "currency": "EUR",
+      "shipping_eur": 6.95,
+      "default_language": "EN"
+    },
+    {
+      "name": "Spelgenot",
+      "url": "https://www.spelgenot.be",
+      "platform": "shopify",
+      "country": "BE",
+      "currency": "EUR",
+      "shipping_eur": 6.95,
+      "default_language": null
+    },
+    {
+      "name": "Fantasy World",
+      "url": "https://fantasyworld.be",
+      "platform": "shopify",
+      "country": "BE",
+      "currency": "EUR",
+      "shipping_eur": 6.95,
+      "default_language": "EN"
+    },
+    {
+      "name": "Cardstore",
+      "url": "https://cardstore.be",
+      "platform": "shopify",
+      "country": "BE",
+      "currency": "EUR",
+      "shipping_eur": 6.95,
+      "default_language": null
+    },
+    {
+      "name": "TCG Company",
+      "url": "https://tcgcompany.nl",
+      "platform": "woocommerce",
+      "country": "NL",
+      "currency": "EUR",
+      "shipping_eur": 4.95,
+      "default_language": "EN",
+      "disabled": true,
+      "_note": "Blocks GitHub (403). Works from a home connection: remove disabled when you run the scanner locally."
+    },
+    {
+      "name": "MegaWereld",
+      "url": "https://megawereld.nl",
+      "platform": "woocommerce",
+      "country": "NL",
+      "currency": "EUR",
+      "shipping_eur": 4.95,
+      "default_language": null
+    },
+    {
+      "name": "Pokemonkaarten.nl",
+      "url": "https://pokemonkaarten.nl",
+      "platform": "woocommerce",
+      "country": "NL",
+      "currency": "EUR",
+      "shipping_eur": 4.95,
+      "default_language": "EN",
+      "search": "",
+      "pokemon_only": true
+    },
+    {
+      "name": "CardCave",
+      "url": "https://cardcave.nl",
+      "platform": "woocommerce",
+      "country": "NL",
+      "currency": "EUR",
+      "shipping_eur": 4.95,
+      "default_language": "EN"
+    },
+    {
+      "name": "Boosterbox.nl",
+      "url": "https://boosterbox.nl",
+      "platform": "woocommerce",
+      "country": "NL",
+      "currency": "EUR",
+      "shipping_eur": 4.95,
+      "default_language": "EN"
+    },
+    {
+      "name": "Dracoon",
+      "url": "https://dracoon.nl",
+      "platform": "woocommerce",
+      "country": "NL",
+      "currency": "EUR",
+      "shipping_eur": 4.95,
+      "default_language": null
+    },
+    {
+      "name": "Queen of Games",
+      "url": "https://queenofgames.be",
+      "platform": "woocommerce",
+      "country": "BE",
+      "currency": "EUR",
+      "shipping_eur": 6.95,
+      "default_language": "EN"
+    },
+    {
+      "name": "WildCards",
+      "url": "https://wildcards.be",
+      "platform": "woocommerce",
+      "country": "BE",
+      "currency": "EUR",
+      "shipping_eur": 6.95,
+      "default_language": "EN"
+    },
+    {
+      "name": "Pokemart",
+      "url": "https://pokemart.be",
+      "platform": "woocommerce",
+      "country": "BE",
+      "currency": "EUR",
+      "shipping_eur": 6.95,
+      "default_language": null
     }
   ],
   "min_shops_for_market_estimate": 3,
