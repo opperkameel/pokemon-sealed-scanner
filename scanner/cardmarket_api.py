@@ -27,6 +27,19 @@ LANGUAGE_IDS = {"EN": 1, "FR": 2, "DE": 3, "ES": 4, "IT": 5, "CN": 6, "JP": 7, "
 # Cardmarket reputation codes: 1 outstanding, 2 very good, 3 good, 4 average, 5 bad, 0 not enough sales yet.
 REPUTATION = {"outstanding": 1, "very good": 2, "good": 3, "average": 4}
 COUNTRY_ALIASES = {"D": "DE"}
+# Cardmarket website filter ids (product page query string), checked against the live filter form.
+WEB_COUNTRY_IDS = {"AT": 1, "BE": 2, "BG": 3, "CY": 5, "CZ": 6, "DE": 7, "DK": 8, "EE": 9, "ES": 10, "FI": 11,
+                   "FR": 12, "GR": 14, "HU": 15, "IE": 16, "IT": 17, "LT": 19, "LU": 20, "LV": 21, "MT": 22,
+                   "NL": 23, "PL": 25, "PT": 26, "RO": 27, "SE": 28, "SI": 30, "SK": 31, "HR": 35}
+
+
+def filter_query(settings):
+    """Query string that opens a Cardmarket product page with the benchmark filters already applied."""
+    countries = ",".join(str(WEB_COUNTRY_IDS[c.upper()]) for c in settings.get("seller_countries", ["BE", "NL"])
+                         if c.upper() in WEB_COUNTRY_IDS)
+    lang = LANGUAGE_IDS[settings.get("language", "EN").upper()]
+    rep = REPUTATION[settings.get("min_seller_reputation", "very good").lower()]
+    return f"?sellerCountry={countries}&language={lang}&sellerReputation={rep}"
 
 
 def _quote(s):

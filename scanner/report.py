@@ -48,7 +48,7 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
   <label>Min margin <input type="number" id="fmin" value="" step="5" style="width:70px"> %</label>
 </div>
 <div class="wrap"><table><thead id="th"></thead><tbody id="tb"></tbody></table></div>
-<p class="note"><b>CM BE/NL min</b> = cheapest live English offer on Cardmarket from a seller in Belgium or the Netherlands with a "very good" or "outstanding" rating (hover to see the seller). Empty when there is no such offer, or when Cardmarket API keys are not set up.</p>
+<p class="note"><b>CM BE/NL min</b>: click <b>Check ↗</b> to open the product on Cardmarket with the filters already on: English only, sellers in Belgium or the Netherlands, rating "very good" or better. The first offer is the benchmark. (Cardmarket isn't giving out API access right now; once it does, this column fills in by itself.)</p>
 <p class="note"><b>CM trend / CM low</b> come from Cardmarket's official daily price guide. They mix all languages and all sellers, so they are a reference, not an English offer from a trusted seller. Click to check the real English listings on Cardmarket.</p>
 <p class="note">Margin = sell price × (1 − __FEE__ fee) − €__FIXED__ − landed cost. "shops median" = median price across at least 3 shops that have it in stock; "verify listing" = less than half the market price, check before buying; set your own sell prices in <code>data/sell_prices.csv</code> for accurate margins.</p>
 <div class="status" id="status"></div>
@@ -88,6 +88,9 @@ function render(){
       if(k==='sell_eur') return `<td class="num">${eur(v)}${r.sell_source?`<span class="tag">${r.sell_source}</span>`:''}</td>`;
       if(k.endsWith('_pct')) return `<td class="num ${cls(v)}">${pct(v)}</td>`;
       if(k==='margin_eur') return `<td class="num ${cls(v)}">${eur(v)}</td>`;
+      if(k==='cm_benl_min_eur'){const u=esc(r.cm_check_url||r.cm_url);
+        if(v!=null) return `<td class="num"><a href="${u}" target="_blank" rel="noopener" title="${esc(r.cm_benl_seller)}">${eur(v)}</a></td>`;
+        return u?`<td class="num"><a class="check" href="${u}" target="_blank" rel="noopener" title="Open Cardmarket filtered on English, sellers in BE/NL, rating very good or better">Check ↗</a></td>`:'<td class="num">–</td>';}
       if(k.startsWith('cm_')&&v!=null) return `<td class="num"><a href="${esc(r.cm_url)}" target="_blank" rel="noopener"${k==='cm_benl_min_eur'?` title="${esc(r.cm_benl_seller)}"`:''}>${eur(v)}</a></td>`;
       if(k.endsWith('_eur')) return `<td class="num">${eur(v)}</td>`;
       return `<td class="${n?'num':''}">${esc(v??'–')}</td>`;

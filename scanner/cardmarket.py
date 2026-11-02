@@ -6,7 +6,9 @@ needs the Cardmarket API (approved professional sellers only), so these are refe
 prices, not buyable offers.
 """
 import json
+import re
 import time
+import unicodedata
 import urllib.request
 from pathlib import Path
 
@@ -20,7 +22,19 @@ FILES = {
 # Only types where one Cardmarket product = one product (tins, blisters and collections have many variants).
 MATCH_TYPES = {"Booster Box", "Elite Trainer Box", "Pokemon Center ETB", "Booster Bundle", "Booster Pack",
                "Build & Battle", "Ultra Premium Collection", "Super Premium Collection"}
-SKIP_NAMES = ("18 boosters", "sleeved", "fun pack", "jumbo", "costco", "sam's club", "half", "display set")
+SKIP_NAMES = ("18 boosters", "sleeved", "fun pack", "jumbo", "costco", "sam's club", "half", "display set", "sticker", " jp ")
+# Cardmarket category name -> URL segment of its product pages.
+CATEGORY_SLUGS = {"Pokémon Booster": "Boosters", "Pokémon Display": "Booster-Boxes",
+                  "Pokémon Elite Trainer Boxes": "Elite-Trainer-Boxes", "Pokémon Box Set": "Box-Sets",
+                  "Pokémon Blisters": "Blisters"}
+PRODUCT_URL = "https://www.cardmarket.com/en/Pokemon/Products/"
+
+
+def product_url(name, category):
+    """Cardmarket product page: accents dropped, every run of other characters becomes one dash."""
+    slug = unicodedata.normalize("NFKD", name).encode("ascii", "ignore").decode()
+    slug = re.sub(r"[^A-Za-z0-9]+", "-", slug).strip("-")
+    return PRODUCT_URL + CATEGORY_SLUGS[category] + "/" + slug if category in CATEGORY_SLUGS else ""
 
 
 def _download(name, url, cache_dir, max_age_h=12):
@@ -33,7 +47,7 @@ def _download(name, url, cache_dir, max_age_h=12):
 
 
 def load_reference(classifier, cache_dir):
-    """Return {(set, type): {"trend", "low", "avg30", "name", "id"}}."""
+    """Return {(set, type): {"trend", "low", "avg30", "name", "id", "url"}}."""
     cache_dir = Path(cache_dir)
     cache_dir.mkdir(parents=True, exist_ok=True)
     products = _download("products", FILES["products"], cache_dir)["products"]
@@ -50,10 +64,11 @@ def load_reference(classifier, cache_dir):
         pg = prices.get(p["idProduct"])
         if not pg or not pg.get("trend"):
             continue
-        candidates.setdefault((info["set"], info["type"]), []).append((len(name), name, p["idProduct"], pg))
+        candidates.setdefault((info["set"], info["type"]), []).append((len(name), name, p["idProduct"], pg, p["categoryName"]))
 
     ref = {}
     for key, items in candidates.items():
-        _, name, pid, pg = min(items)  # shortest name = the plain product, e.g. "Perfect Order Booster Box"
-        ref[key] = {"trend": pg.get("trend"), "low": pg.get("low"), "avg30": pg.get("avg30"), "name": name, "id": pid}
+        _, name, pid, pg, cat = min(items, key=lambda x: x[:3])  # shortest name = the plain product, e.g. "Perfect Order Booster Box"
+        ref[key] = {"trend": pg.get("trend"), "low": pg.get("low"), "avg30": pg.get("avg30"), "name": name, "id": pid,
+                    "url": product_url(name, cat)}
     return ref

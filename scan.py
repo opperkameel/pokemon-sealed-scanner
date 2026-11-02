@@ -17,7 +17,7 @@ import time
 from pathlib import Path
 
 from scanner.cardmarket import load_reference
-from scanner.cardmarket_api import benelux_minimum
+from scanner.cardmarket_api import benelux_minimum, filter_query
 from scanner.classify import Classifier
 from scanner.report import write_report
 from scanner.sources import detect, fetch_shop, fx_rates_to_eur
@@ -118,6 +118,7 @@ def add_margins(rows, cfg, sell_prices, cm):
             shop_min[r["shop"]] = min(shop_min.get(r["shop"], 1e9), r["price_eur"])
     market = {g: (statistics.median(v.values()), len(v)) for g, v in by_group.items()}
 
+    cm_filter = filter_query(cfg.get("cardmarket_api", {}))
     fee = cfg["selling"]["fee_pct"]
     fixed = cfg["selling"]["fixed_cost_eur"]
     use_market = cfg.get("estimate_sell_from_market", True)
@@ -136,8 +137,11 @@ def add_margins(rows, cfg, sell_prices, cm):
         live = ref.get("live") if ref else None
         r["cm_benl_min_eur"] = live["price"] if live else None
         r["cm_benl_seller"] = f"{live['seller']} ({live['country']}), {live['offers']} offers" if live else ""
-        r["cm_url"] = ("https://www.cardmarket.com/en/Pokemon/Products/Search?searchString="
-                       + urllib.parse.quote_plus(ref["name"])) if ref else ""
+        search = ("https://www.cardmarket.com/en/Pokemon/Products/Search?searchString="
+                  + urllib.parse.quote_plus(ref["name"])) if ref else ""
+        r["cm_url"] = ref["url"] or search if ref else ""
+        # Product page with the benchmark filters on: English, BE/NL sellers, rated very good or better.
+        r["cm_check_url"] = ref["url"] + cm_filter if ref and ref["url"] else search
 
         options = {
             "your_price": sell_prices.get(r["group"] or ""),
@@ -176,7 +180,7 @@ def write_csvs(rows, market, sell_prices, stamp):
     OUT.mkdir(exist_ok=True)
     fields = ["set", "type", "language", "title", "shop", "country", "in_stock", "preorder", "price", "currency",
               "price_eur", "landed_eur", "market_median_eur", "shops_in_stock", "vs_market_pct", "sell_eur",
-              "sell_source", "margin_eur", "margin_pct", "cm_benl_min_eur", "cm_benl_seller", "cm_trend_eur", "cm_low_eur", "best_in_europe", "check", "url"]
+              "sell_source", "margin_eur", "margin_pct", "cm_benl_min_eur", "cm_benl_seller", "cm_trend_eur", "cm_low_eur", "best_in_europe", "check", "url", "cm_check_url"]
     rows_sorted = sorted(rows, key=lambda r: (r["margin_pct"] is None, -(r["margin_pct"] or 0)))
     with (OUT / "deals.csv").open("w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")

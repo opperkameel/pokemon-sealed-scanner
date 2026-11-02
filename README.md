@@ -96,26 +96,17 @@ no language label is skipped, so nothing in another language slips through. To a
 
 ## Cardmarket benchmark (BE + NL, English only)
 
-The benchmark is **CM BE/NL min**: the cheapest live **English** offer on Cardmarket from a seller in
-**Belgium or the Netherlands** with a **"very good" or "outstanding"** rating (sellers on holiday are skipped).
-It is used as the sell price unless you set your own (`sell_price_priority` in `config.json`).
-Countries, language and minimum rating are set under `cardmarket_api` in `config.json`.
+In the report, the column **CM BE/NL min** has a **Check ↗** link per product. It opens the product on Cardmarket
+with the filters already on: **English** only, sellers in **Belgium or the Netherlands**, rating **"very good" or
+better**. The first offer on that page is your benchmark. If it's a product you'll sell, put that price in
+`data/sell_prices.csv` and the next scan uses it as your sell price.
+Countries, language and minimum rating are set under `cardmarket_api` in `config.json` (they also set the link filters).
 
-This needs the **Cardmarket API** (their official access for software; the website itself blocks automated visitors).
-To switch it on:
-
-1. In your Cardmarket account, go to **Account → Settings → API** (or the *Developer* section) and create a
-   **Dedicated App**. Cardmarket gives you 4 keys: *App token*, *App secret*, *Access token*, *Access token secret*.
-   If the API option isn't available on your account, ask Cardmarket support; they don't open it to every account.
-2. **Online (GitHub):** repo → *Settings* → *Secrets and variables* → *Actions* → **New repository secret**, four times:
-   `CARDMARKET_APP_TOKEN`, `CARDMARKET_APP_SECRET`, `CARDMARKET_ACCESS_TOKEN`, `CARDMARKET_ACCESS_SECRET`.
-   Secrets stay private, even though the repo is public.
-3. **On your Mac (optional):** create a file `.env` next to `scan.py` with the same four lines (`NAME=value`).
-   It is excluded from git, so it never goes online.
-
-The scan log then shows e.g. `Cardmarket live offers: 180 of 240 products have English offers from BE/NL sellers`.
-Without keys it shows `off (no Cardmarket API keys)` and the report falls back to the shops median and
-Cardmarket's public price guide (**CM trend / CM low**, which mix all languages and all sellers).
+Filling this column automatically needs the Cardmarket API, and Cardmarket isn't accepting new API applications right
+now. The code for it is ready: if access reopens, create a **Dedicated App** under *Account → API Settings*, then add
+its 4 keys as GitHub repository secrets (`CARDMARKET_APP_TOKEN`, `CARDMARKET_APP_SECRET`, `CARDMARKET_ACCESS_TOKEN`,
+`CARDMARKET_ACCESS_SECRET`) or in a local `.env` file next to `scan.py`. The column then shows the cheapest matching
+offer itself and uses it as the sell price.
 
 ## Recognising products
 
