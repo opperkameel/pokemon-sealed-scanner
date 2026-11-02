@@ -17,6 +17,7 @@ import time
 from pathlib import Path
 
 from scanner.cardmarket import load_reference
+from scanner.cardmarket_api import benelux_minimum
 from scanner.classify import Classifier
 from scanner.report import write_report
 from scanner.sources import detect, fetch_shop, fx_rates_to_eur
@@ -98,6 +99,13 @@ def scan(cfg, in_stock_only):
     except Exception as e:
         print(f"  ✗ Cardmarket price guide unavailable: {e}")
         cm = {}
+    # Live Cardmarket offers (API keys needed): only for products we actually found in shops.
+    found = {(r["set"], r["type"]) for r in rows if r["group"]}
+    ids = [ref["id"] for key, ref in cm.items() if key in found]
+    live, msg = benelux_minimum(ids, cfg.get("cardmarket_api", {}), ROOT)
+    print(f"Cardmarket live offers: {msg}")
+    for ref in cm.values():
+        ref["live"] = live.get(ref["id"])
     return rows, shop_status, fx["_source"], cm
 
 
@@ -125,17 +133,22 @@ def add_margins(rows, cfg, sell_prices, cm):
         ref = cm.get((r["set"], r["type"])) if r["group"] else None
         r["cm_trend_eur"] = ref["trend"] if ref else None
         r["cm_low_eur"] = ref["low"] if ref else None
+        live = ref.get("live") if ref else None
+        r["cm_benl_min_eur"] = live["price"] if live else None
+        r["cm_benl_seller"] = f"{live['seller']} ({live['country']}), {live['offers']} offers" if live else ""
         r["cm_url"] = ("https://www.cardmarket.com/en/Pokemon/Products/Search?searchString="
                        + urllib.parse.quote_plus(ref["name"])) if ref else ""
 
         options = {
             "your_price": sell_prices.get(r["group"] or ""),
             "shops_median": med if use_market and med and n_shops >= min_shops else None,
+            "cardmarket_benl_min": r["cm_benl_min_eur"],
             "cardmarket_trend": r["cm_trend_eur"],
         }
-        labels = {"your_price": "your price", "shops_median": "shops median", "cardmarket_trend": "CM trend"}
+        labels = {"your_price": "your price", "shops_median": "shops median",
+                  "cardmarket_benl_min": "CM BE/NL min", "cardmarket_trend": "CM trend"}
         sell, source = None, ""
-        for key in cfg.get("sell_price_priority", ["your_price", "shops_median", "cardmarket_trend"]):
+        for key in cfg.get("sell_price_priority", ["your_price", "cardmarket_benl_min", "shops_median", "cardmarket_trend"]):
             if options.get(key):
                 sell, source = options[key], labels[key]
                 break
@@ -163,7 +176,7 @@ def write_csvs(rows, market, sell_prices, stamp):
     OUT.mkdir(exist_ok=True)
     fields = ["set", "type", "language", "title", "shop", "country", "in_stock", "preorder", "price", "currency",
               "price_eur", "landed_eur", "market_median_eur", "shops_in_stock", "vs_market_pct", "sell_eur",
-              "sell_source", "margin_eur", "margin_pct", "cm_trend_eur", "cm_low_eur", "best_in_europe", "check", "url"]
+              "sell_source", "margin_eur", "margin_pct", "cm_benl_min_eur", "cm_benl_seller", "cm_trend_eur", "cm_low_eur", "best_in_europe", "check", "url"]
     rows_sorted = sorted(rows, key=lambda r: (r["margin_pct"] is None, -(r["margin_pct"] or 0)))
     with (OUT / "deals.csv").open("w", newline="", encoding="utf-8") as f:
         w = csv.DictWriter(f, fieldnames=fields, extrasaction="ignore")

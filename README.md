@@ -94,12 +94,28 @@ connection: it is in `config.json` with `"disabled": true`; remove that line whe
 shop's categories/tags when they name exactly one language. In shops that sell several languages, a product with
 no language label is skipped, so nothing in another language slips through. To also scan e.g. Japanese, use `["EN", "JP"]`.
 
-## Cardmarket: what is and isn't possible
+## Cardmarket benchmark (BE + NL, English only)
 
-- Included: Cardmarket's public price guide (trend, lowest price) for ~280 sealed products.
-- Not included: live English offers filtered on seller reputation. Cardmarket blocks automated visitors to its site,
-  and that data is only available through the Cardmarket API, which they grant to approved professional sellers.
-  If you get API access, it can be added to `scanner/cardmarket.py`.
+The benchmark is **CM BE/NL min**: the cheapest live **English** offer on Cardmarket from a seller in
+**Belgium or the Netherlands** with a **"very good" or "outstanding"** rating (sellers on holiday are skipped).
+It is used as the sell price unless you set your own (`sell_price_priority` in `config.json`).
+Countries, language and minimum rating are set under `cardmarket_api` in `config.json`.
+
+This needs the **Cardmarket API** (their official access for software; the website itself blocks automated visitors).
+To switch it on:
+
+1. In your Cardmarket account, go to **Account → Settings → API** (or the *Developer* section) and create a
+   **Dedicated App**. Cardmarket gives you 4 keys: *App token*, *App secret*, *Access token*, *Access token secret*.
+   If the API option isn't available on your account, ask Cardmarket support; they don't open it to every account.
+2. **Online (GitHub):** repo → *Settings* → *Secrets and variables* → *Actions* → **New repository secret**, four times:
+   `CARDMARKET_APP_TOKEN`, `CARDMARKET_APP_SECRET`, `CARDMARKET_ACCESS_TOKEN`, `CARDMARKET_ACCESS_SECRET`.
+   Secrets stay private, even though the repo is public.
+3. **On your Mac (optional):** create a file `.env` next to `scan.py` with the same four lines (`NAME=value`).
+   It is excluded from git, so it never goes online.
+
+The scan log then shows e.g. `Cardmarket live offers: 180 of 240 products have English offers from BE/NL sellers`.
+Without keys it shows `off (no Cardmarket API keys)` and the report falls back to the shops median and
+Cardmarket's public price guide (**CM trend / CM low**, which mix all languages and all sellers).
 
 ## Recognising products
 

@@ -18,6 +18,26 @@
     "PLN": 0.235,
     "CZK": 0.04
   },
+  "min_shops_for_market_estimate": 3,
+  "allowed_languages": [
+    "EN"
+  ],
+  "sell_price_priority": [
+    "your_price",
+    "cardmarket_benl_min",
+    "shops_median",
+    "cardmarket_trend"
+  ],
+  "cardmarket_api": {
+    "seller_countries": [
+      "BE",
+      "NL"
+    ],
+    "language": "EN",
+    "min_seller_reputation": "very good",
+    "request_delay_seconds": 0.3,
+    "_comment": "Live Cardmarket benchmark. Needs API keys in .env (local) or GitHub secrets. Reputation: outstanding | very good | good | average."
+  },
   "shops": [
     {
       "name": "cardcosmos",
@@ -510,14 +530,5 @@
       "shipping_eur": 6.95,
       "default_language": null
     }
-  ],
-  "min_shops_for_market_estimate": 3,
-  "allowed_languages": [
-    "EN"
-  ],
-  "sell_price_priority": [
-    "your_price",
-    "shops_median",
-    "cardmarket_trend"
   ]
 }

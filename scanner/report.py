@@ -48,6 +48,7 @@ a{color:var(--accent);text-decoration:none}a:hover{text-decoration:underline}
   <label>Min margin <input type="number" id="fmin" value="" step="5" style="width:70px"> %</label>
 </div>
 <div class="wrap"><table><thead id="th"></thead><tbody id="tb"></tbody></table></div>
+<p class="note"><b>CM BE/NL min</b> = cheapest live English offer on Cardmarket from a seller in Belgium or the Netherlands with a "very good" or "outstanding" rating (hover to see the seller). Empty when there is no such offer, or when Cardmarket API keys are not set up.</p>
 <p class="note"><b>CM trend / CM low</b> come from Cardmarket's official daily price guide. They mix all languages and all sellers, so they are a reference, not an English offer from a trusted seller. Click to check the real English listings on Cardmarket.</p>
 <p class="note">Margin = sell price × (1 − __FEE__ fee) − €__FIXED__ − landed cost. "shops median" = median price across at least 3 shops that have it in stock; "verify listing" = less than half the market price, check before buying; set your own sell prices in <code>data/sell_prices.csv</code> for accurate margins.</p>
 <div class="status" id="status"></div>
@@ -64,8 +65,8 @@ for(const [id,key] of [['ftype','type'],['flang','language'],['fshop','shop']]){
   [...new Set(ROWS.map(r=>r[key]))].sort().forEach(v=>$(id).insertAdjacentHTML('beforeend',`<option>${esc(v)}</option>`));
 }
 const COLS={
- offers:[['title','Product'],['set','Set'],['type','Type'],['language','Lang'],['shop','Shop'],['price_eur','Price','n'],['landed_eur','Landed','n'],['market_median_eur','Shops median','n'],['cm_trend_eur','CM trend','n'],['cm_low_eur','CM low','n'],['sell_eur','Sell','n'],['margin_eur','Margin €','n'],['margin_pct','Margin %','n']],
- best:[['set','Set'],['type','Type'],['language','Lang'],['shop','Cheapest shop'],['landed_eur','Best landed','n'],['market_median_eur','Shops median','n'],['shops_in_stock','# shops','n'],['cm_trend_eur','CM trend','n'],['cm_low_eur','CM low','n'],['sell_eur','Sell','n'],['margin_eur','Margin €','n'],['margin_pct','Margin %','n']]
+ offers:[['title','Product'],['set','Set'],['type','Type'],['language','Lang'],['shop','Shop'],['price_eur','Price','n'],['landed_eur','Landed','n'],['market_median_eur','Shops median','n'],['cm_benl_min_eur','CM BE/NL min','n'],['cm_trend_eur','CM trend','n'],['cm_low_eur','CM low','n'],['sell_eur','Sell','n'],['margin_eur','Margin €','n'],['margin_pct','Margin %','n']],
+ best:[['set','Set'],['type','Type'],['language','Lang'],['shop','Cheapest shop'],['landed_eur','Best landed','n'],['market_median_eur','Shops median','n'],['shops_in_stock','# shops','n'],['cm_benl_min_eur','CM BE/NL min','n'],['cm_trend_eur','CM trend','n'],['cm_low_eur','CM low','n'],['sell_eur','Sell','n'],['margin_eur','Margin €','n'],['margin_pct','Margin %','n']]
 };
 function filtered(){
   const q=$('q').value.toLowerCase(), t=$('ftype').value, l=$('flang').value, s=$('fshop').value;
@@ -87,7 +88,7 @@ function render(){
       if(k==='sell_eur') return `<td class="num">${eur(v)}${r.sell_source?`<span class="tag">${r.sell_source}</span>`:''}</td>`;
       if(k.endsWith('_pct')) return `<td class="num ${cls(v)}">${pct(v)}</td>`;
       if(k==='margin_eur') return `<td class="num ${cls(v)}">${eur(v)}</td>`;
-      if(k.startsWith('cm_')&&v!=null) return `<td class="num"><a href="${esc(r.cm_url)}" target="_blank" rel="noopener">${eur(v)}</a></td>`;
+      if(k.startsWith('cm_')&&v!=null) return `<td class="num"><a href="${esc(r.cm_url)}" target="_blank" rel="noopener"${k==='cm_benl_min_eur'?` title="${esc(r.cm_benl_seller)}"`:''}>${eur(v)}</a></td>`;
       if(k.endsWith('_eur')) return `<td class="num">${eur(v)}</td>`;
       return `<td class="${n?'num':''}">${esc(v??'–')}</td>`;
     }).join('')+'</tr>';

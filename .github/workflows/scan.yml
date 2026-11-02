@@ -31,6 +31,10 @@ jobs:
       - name: Run scanner
         env:
           TZ: Europe/Amsterdam
+          CARDMARKET_APP_TOKEN: ${{ secrets.CARDMARKET_APP_TOKEN }}
+          CARDMARKET_APP_SECRET: ${{ secrets.CARDMARKET_APP_SECRET }}
+          CARDMARKET_ACCESS_TOKEN: ${{ secrets.CARDMARKET_ACCESS_TOKEN }}
+          CARDMARKET_ACCESS_SECRET: ${{ secrets.CARDMARKET_ACCESS_SECRET }}
         run: python3 scan.py
 
       - name: Save price history
